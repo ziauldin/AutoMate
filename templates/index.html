@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoGenius</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Auto Genius</h2>
+                <button id="toggle-sidebar-btn" class="icon-btn mobile-only">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div id="user-profile" class="user-profile">
+                    <div id="user-avatar" class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <div id="user-name-display" class="user-name">User</div>
+                        <div id="user-profession-display" class="user-profession">Auto Enthusiast</div>
+                    </div>
+                </div>
+                
+                <button id="new-chat-btn" class="primary-btn">
+                    <i class="fas fa-plus"></i> New Diagnosis
+                </button>
+                
+                <div class="sidebar-section">
+                    <h3>Past Conversations</h3>
+                    <div id="history-list" class="history-list">
+                        <div class="history-empty">No past conversations found</div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Settings</h3>
+                    <div class="settings-item">
+                        <div class="text-size-controls">
+                            <span>Text Size</span>
+                            <div class="text-size-buttons">
+                                <button id="text-size-xlarge" class="text-size-btn">A</button>
+                                <button id="text-size-xxlarge" class="text-size-btn active">A+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settings-item">
+                        <button id="toggle-theme-btn" class="secondary-btn">
+                            <i class="fas fa-moon"></i> Dark Mode
+                        </button>
+                    </div>
+                    <div class="settings-item">
+                        <button id="clear-history-btn" class="secondary-btn">
+                            <i class="fas fa-trash"></i> Clear History
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="auth-status-container" class="sidebar-section">
+                    <button id="login-btn" class="primary-btn">
+                        <i class="fab fa-google"></i> Sign in with Google
+                    </button>
+                    <button id="logout-btn" class="secondary-btn" style="display: none;">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </button>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <p>© 2025 AutoGenius</p>
+                    <p>Version 1.0</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <button id="view-history-btn" class="icon-btn mobile-only">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="chat-title">
+                    <h1 id="chat-title-text">AutoGenius</h1>
+                </div>
+                <div class="header-actions">
+                    <button id="export-chat-btn" class="icon-btn" title="Export Chat">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Welcome Screen -->
+            <div id="welcome-screen" class="welcome-screen">
+                <div class="welcome-content">
+                    <div class="welcome-header">
+                        <h1>Welcome to AutoGenius</h1>
+                        <p>Get expert diagnosis for your vehicle issues and find the right parts</p>
+                    </div>
+                    
+                    <div class="welcome-body">
+                        <div class="welcome-section">
+                            <h2>Start a New Diagnosis</h2>
+                            <p>Select your vehicle details to begin</p>
+                            
+                            <div class="input-toggle">
+                                <button id="toggle-manual-mode" class="toggle-btn active">Manual Input</button>
+                                <button id="toggle-selection-mode" class="toggle-btn">Selection Mode</button>
+                            </div>
+                            
+                            <!-- Manual Input Form -->
+                            <div id="manual-input-form" class="manual-input-form">
+                                <div class="input-group">
+                                    <label for="manufacturer-input">Manufacturer</label>
+                                    <input type="text" id="manufacturer-input" placeholder="e.g., Toyota">
+                                </div>
+                                <div class="input-group">
+                                    <label for="model-input">Model</label>
+                                    <input type="text" id="model-input" placeholder="e.g., Camry">
+                                </div>
+                                <div class="input-group">
+                                    <label for="year-input">Year</label>
+                                    <input type="number" id="year-input" min="1900" max="2023" placeholder="e.g., 2018">
+                                </div>
+                                <button id="start-chat-btn" class="primary-btn" disabled>Start Diagnosis</button>
+                            </div>
+                            
+                            <!-- Selection Grids -->
+                            <div id="selection-grids" class="selection-grids">
+                                <!-- Manufacturer Selection -->
+                                <div id="manufacturer-selection" class="selection-step">
+                                    <div class="step-header">
+                                        <h3>Select Manufacturer</h3>
+                                    </div>
+                                    <div id="manufacturer-grid" class="grid-container"></div>
+                                </div>
+                                
+                                <!-- Model Selection -->
+                                <div id="model-selection" class="selection-step" style="display: none;">
+                                    <div class="step-header">
+                                        <button id="back-to-manufacturer" class="back-btn">
+                                            <i class="fas fa-arrow-left"></i> Back
+                                        </button>
+                                        <h3 id="model-title">Select Model</h3>
+                                    </div>
+                                    <div id="model-grid" class="grid-container"></div>
+                                </div>
+                                
+                                <!-- Year Selection -->
+                                <div id="year-selection" class="selection-step" style="display: none;">
+                                    <div class="step-header">
+                                        <button id="back-to-model" class="back-btn">
+                                            <i class="fas fa-arrow-left"></i> Back
+                                        </button>
+                                        <h3 id="year-title">Select Year</h3>
+                                    </div>
+                                    <div id="year-grid" class="grid-container"></div>
+                                </div>
+                                
+                                <!-- Selection Steps -->
+                                <div class="selection-steps">
+                                    <div class="step active" data-step="manufacturer">1</div>
+                                    <div class="step" data-step="model">2</div>
+                                    <div class="step" data-step="year">3</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="welcome-section">
+                            <h2>How It Works</h2>
+                            <div class="how-it-works">
+                                <div class="step-card">
+                                    <div class="step-icon">
+                                        <i class="fas fa-car"></i>
+                                    </div>
+                                    <h3>Select Your Vehicle</h3>
+                                    <p>Enter your vehicle's make, model, and year</p>
+                                </div>
+                                <div class="step-card">
+                                    <div class="step-icon">
+                                        <i class="fas fa-comment-dots"></i>
+                                    </div>
+                                    <h3>Describe the Issue</h3>
+                                    <p>Tell us what problems you're experiencing</p>
+                                </div>
+                                <div class="step-card">
+                                    <div class="step-icon">
+                                        <i class="fas fa-tools"></i>
+                                    </div>
+                                    <h3>Get Diagnosis</h3>
+                                    <p>Receive expert diagnosis and part recommendations</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="welcome-section">
+                            <h2>Common Issues</h2>
+                            <div class="suggestion-chips">
+                                <div class="suggestion-chip" data-text="My engine is making a knocking sound">
+                                    Engine knocking
+                                </div>
+                                <div class="suggestion-chip" data-text="My brakes are squeaking when I press them">
+                                    Brake squeaking
+                                </div>
+                                <div class="suggestion-chip" data-text="My car won't start and the battery is new">
+                                    Starting problems
+                                </div>
+                                <div class="suggestion-chip" data-text="The check engine light is on">
+                                    Check engine light
+                                </div>
+                                <div class="suggestion-chip" data-text="My car is overheating">
+                                    Overheating
+                                </div>
+                                <div class="suggestion-chip" data-text="I hear a grinding noise when shifting gears">
+                                    Transmission issues
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Interface -->
+            <div id="chat-interface" class="chat-interface" style="display: none;">
+                <div id="chat-messages" class="chat-messages"></div>
+                
+                <div class="chat-input-container">
+                    <form id="chat-form">
+                        <div class="chat-input-wrapper">
+                            <textarea id="user-input" placeholder="Describe your vehicle issue..."></textarea>
+                            <div class="chat-input-actions">
+                              <button id="attach-image-btn"><i class="fas fa-image"></i></button>
+                              <button id="voice-input-btn"><i class="fas fa-microphone"></i></button>
+                              <button id="send-btn" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+                            </div>
+                          </div>
+                        </form>
+                    <form id="image-upload-form" style="display: none;">
+                        <input type="file" id="image-upload" accept="image/*">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Image Modal -->
+    <div id="image-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <div class="image-loading">
+                <div class="spinner"></div>
+                <p>Loading image...</p>
+            </div>
+            <img id="image-preview" src="/placeholder.svg" alt="Image Preview" style="display: none;">
+        </div>
+    </div>
+    
+    <!-- Comparison Modal -->
+    <div id="comparison-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal-btn">&times;</button>
+            <div id="comparison-content"></div>
+        </div>
+    </div>
+    
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

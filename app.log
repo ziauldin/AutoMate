@@ -1,0 +1,260 @@
+2025-04-25 23:39:56,832 - watchfiles.main - INFO - 5 changes detected
+2025-04-25 23:40:23,856 - car_diagnostics.llm - INFO - CarDiagnosisChat initialized with Groq API
+2025-04-25 23:40:25,255 - car_diagnostics.llm - INFO - Calling Groq API with 2 messages
+2025-04-25 23:40:27,491 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:40:27,491 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:40:27,507 - car_diagnostics - INFO - New chat session created: 5c36583b-4a6e-4544-8ed9-50a29271f157 for {'manufacturer': 'Honda', 'model': 'Civic', 'year': 2020}
+2025-04-25 23:40:49,641 - car_diagnostics.llm - INFO - Calling Groq API with 3 messages
+2025-04-25 23:40:51,558 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:40:51,575 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:40:51,575 - car_diagnostics - INFO - Message processed for session 5c36583b-4a6e-4544-8ed9-50a29271f157
+2025-04-25 23:43:06,382 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:07,096 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:07,555 - watchfiles.main - INFO - 5 changes detected
+2025-04-25 23:43:07,912 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:08,270 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:08,629 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:08,995 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:09,348 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:09,760 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:10,162 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:10,572 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:10,927 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:11,346 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:11,759 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:12,162 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:12,574 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:12,983 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:13,393 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:13,856 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:14,261 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:14,667 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:15,083 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:15,488 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:15,892 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:16,297 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:16,702 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:17,121 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:17,538 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:17,954 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:18,368 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:18,783 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:19,195 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:19,599 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:19,963 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:20,370 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:20,784 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:20,881 - car_diagnostics - WARNING - Session not found: 5c36583b-4a6e-4544-8ed9-50a29271f157
+2025-04-25 23:43:20,881 - car_diagnostics - ERROR - Error in chat: 404: Session not found
+Traceback (most recent call last):
+  File "E:\AutoWorkshopChatbot\main.py", line 140, in chat
+    raise HTTPException(status_code=404, detail="Session not found")
+fastapi.exceptions.HTTPException: 404: Session not found
+2025-04-25 23:43:21,188 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:21,644 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:22,060 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:22,463 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:22,867 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:23,241 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:23,649 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:24,063 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:24,480 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:24,892 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:25,296 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:25,709 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:26,113 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:26,522 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:26,925 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:27,330 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:27,744 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:28,113 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:43:47,132 - car_diagnostics.llm - INFO - CarDiagnosisChat initialized with Groq API
+2025-04-25 23:43:48,214 - car_diagnostics.llm - INFO - Calling Groq API with 2 messages
+2025-04-25 23:43:49,689 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:43:49,689 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:43:49,705 - car_diagnostics - INFO - New chat session created: f41af2a7-f7ef-4662-bd0d-b41db37fdc9a for {'manufacturer': 'Honda', 'model': 'Civic', 'year': 2020}
+2025-04-25 23:43:55,956 - car_diagnostics.llm - INFO - Calling Groq API with 3 messages
+2025-04-25 23:43:56,608 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:43:56,608 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:43:56,608 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:45:19,087 - car_diagnostics.llm - INFO - Calling Groq API with 5 messages
+2025-04-25 23:45:19,787 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:45:19,787 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:45:19,787 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:49:31,303 - car_diagnostics - INFO - Image uploaded: /static/uploads/5e0621b3-8320-4d87-9d9b-d4fcb2bae36c.jpg for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:49:31,399 - watchfiles.main - INFO - 3 changes detected
+2025-04-25 23:49:31,764 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:49:48,231 - car_diagnostics.llm - INFO - Calling Groq API with 7 messages
+2025-04-25 23:49:48,934 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:49:48,951 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:49:48,951 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:50:02,509 - car_diagnostics.llm - INFO - Calling Groq API with 9 messages
+2025-04-25 23:50:03,188 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:50:03,188 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:50:03,188 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:50:25,251 - car_diagnostics.llm - INFO - Calling Groq API with 11 messages
+2025-04-25 23:50:26,582 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:50:26,586 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:50:26,587 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:50:31,731 - car_diagnostics.llm - INFO - Calling Groq API with 10 messages
+2025-04-25 23:50:32,880 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:50:32,880 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:50:32,880 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:50:38,128 - car_diagnostics.llm - INFO - Calling Groq API with 12 messages
+2025-04-25 23:50:39,690 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:50:39,690 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:50:39,690 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:53:27,538 - car_diagnostics.llm - INFO - Calling Groq API with 10 messages
+2025-04-25 23:53:28,562 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:53:28,562 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:53:28,569 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:54:58,232 - car_diagnostics.llm - INFO - Calling Groq API with 12 messages
+2025-04-25 23:54:59,034 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:54:59,037 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:54:59,039 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:55:07,350 - car_diagnostics.llm - INFO - Calling Groq API with 10 messages
+2025-04-25 23:55:08,877 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:55:08,880 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:55:08,882 - car_diagnostics - INFO - Message processed for session f41af2a7-f7ef-4662-bd0d-b41db37fdc9a
+2025-04-25 23:55:32,085 - car_diagnostics.llm - INFO - CarDiagnosisChat initialized with Groq API
+2025-04-25 23:55:32,484 - car_diagnostics.llm - INFO - Calling Groq API with 2 messages
+2025-04-25 23:55:33,990 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:55:33,992 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:55:33,993 - car_diagnostics - INFO - New chat session created: 14ba5768-3780-4016-801f-55686e778bea for {'manufacturer': 'Suzuki', 'model': 'Santro', 'year': 2005}
+2025-04-25 23:55:40,297 - car_diagnostics.llm - INFO - Calling Groq API with 3 messages
+2025-04-25 23:55:42,012 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:55:42,015 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:55:42,017 - car_diagnostics - INFO - Message processed for session 14ba5768-3780-4016-801f-55686e778bea
+2025-04-25 23:56:02,960 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:03,826 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:04,735 - watchfiles.main - INFO - 5 changes detected
+2025-04-25 23:56:05,099 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:05,454 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:05,857 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:06,264 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:06,673 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:07,034 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:07,445 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:07,913 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:08,277 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:08,689 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:09,093 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:09,504 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:09,911 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:10,317 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:10,720 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:11,127 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:11,223 - car_diagnostics - WARNING - Session not found: 14ba5768-3780-4016-801f-55686e778bea
+2025-04-25 23:56:11,224 - car_diagnostics - ERROR - Error in chat: 404: Session not found
+Traceback (most recent call last):
+  File "E:\AutoWorkshopChatbot\main.py", line 140, in chat
+    raise HTTPException(status_code=404, detail="Session not found")
+fastapi.exceptions.HTTPException: 404: Session not found
+2025-04-25 23:56:11,533 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:11,944 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:12,400 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:12,809 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:13,215 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:13,621 - watchfiles.main - INFO - 1 change detected
+2025-04-25 23:56:30,561 - car_diagnostics.llm - INFO - CarDiagnosisChat initialized with Groq API
+2025-04-25 23:56:31,492 - car_diagnostics.llm - INFO - Calling Groq API with 2 messages
+2025-04-25 23:56:32,814 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:56:32,815 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:56:32,817 - car_diagnostics - INFO - New chat session created: f65a67ee-e8e4-4c82-a60b-5e2b44d1c615 for {'manufacturer': 'Suzuki', 'model': 'Santro', 'year': 2005}
+2025-04-25 23:56:38,533 - car_diagnostics.llm - INFO - Calling Groq API with 3 messages
+2025-04-25 23:56:40,119 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:56:40,122 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:56:40,122 - car_diagnostics - INFO - Message processed for session f65a67ee-e8e4-4c82-a60b-5e2b44d1c615
+2025-04-25 23:59:36,435 - car_diagnostics.llm - INFO - CarDiagnosisChat initialized with Groq API
+2025-04-25 23:59:37,447 - car_diagnostics.llm - INFO - Calling Groq API with 2 messages
+2025-04-25 23:59:38,632 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:59:38,638 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:59:38,639 - car_diagnostics - INFO - New chat session created: 22214efc-34ce-457a-8206-806a8f1c72cb for {'manufacturer': 'Honda', 'model': 'Civic', 'year': 2020}
+2025-04-25 23:59:44,865 - car_diagnostics.llm - INFO - Calling Groq API with 3 messages
+2025-04-25 23:59:45,628 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:59:45,629 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:59:45,630 - car_diagnostics - INFO - Message processed for session 22214efc-34ce-457a-8206-806a8f1c72cb
+2025-04-25 23:59:49,588 - car_diagnostics.llm - INFO - Calling Groq API with 5 messages
+2025-04-25 23:59:50,866 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-25 23:59:50,867 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-25 23:59:50,868 - car_diagnostics - INFO - Message processed for session 22214efc-34ce-457a-8206-806a8f1c72cb
+2025-04-26 00:00:15,669 - car_diagnostics.llm - INFO - Calling Groq API with 7 messages
+2025-04-26 00:00:16,486 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 00:00:16,489 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 00:00:16,489 - car_diagnostics - INFO - Message processed for session 22214efc-34ce-457a-8206-806a8f1c72cb
+2025-04-26 00:00:26,180 - car_diagnostics.llm - INFO - Calling Groq API with 9 messages
+2025-04-26 00:00:27,202 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 00:00:27,204 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 00:00:27,204 - car_diagnostics - INFO - Message processed for session 22214efc-34ce-457a-8206-806a8f1c72cb
+2025-04-26 00:00:45,873 - car_diagnostics.llm - INFO - Calling Groq API with 11 messages
+2025-04-26 00:00:46,972 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 00:00:46,973 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 00:00:46,974 - car_diagnostics - INFO - Message processed for session 22214efc-34ce-457a-8206-806a8f1c72cb
+2025-04-26 00:02:15,287 - watchfiles.main - INFO - 1 change detected
+2025-04-26 00:02:15,927 - watchfiles.main - INFO - 1 change detected
+2025-04-26 00:02:16,537 - watchfiles.main - INFO - 5 changes detected
+2025-04-26 00:02:16,892 - watchfiles.main - INFO - 1 change detected
+2025-04-26 00:02:17,253 - watchfiles.main - INFO - 1 change detected
+2025-04-26 00:02:28,863 - car_diagnostics - WARNING - Session not found: 22214efc-34ce-457a-8206-806a8f1c72cb
+2025-04-26 00:02:28,864 - car_diagnostics - ERROR - Error in chat: 404: Session not found
+Traceback (most recent call last):
+  File "E:\AutoWorkshopChatbot\main.py", line 140, in chat
+    raise HTTPException(status_code=404, detail="Session not found")
+fastapi.exceptions.HTTPException: 404: Session not found
+2025-04-26 00:02:42,126 - car_diagnostics.llm - INFO - CarDiagnosisChat initialized with Groq API
+2025-04-26 00:02:42,589 - car_diagnostics.llm - INFO - Calling Groq API with 2 messages
+2025-04-26 00:02:43,792 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 00:02:43,795 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 00:02:43,797 - car_diagnostics - INFO - New chat session created: cf7d293e-d123-4637-8e1b-9fe28262e93d for {'manufacturer': 'Honda', 'model': 'Civic', 'year': 2020}
+2025-04-26 00:02:50,711 - car_diagnostics.llm - INFO - Calling Groq API with 3 messages
+2025-04-26 00:02:51,491 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 00:02:51,494 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 00:02:51,495 - car_diagnostics - INFO - Message processed for session cf7d293e-d123-4637-8e1b-9fe28262e93d
+2025-04-26 00:03:05,469 - car_diagnostics.llm - INFO - Calling Groq API with 5 messages
+2025-04-26 00:03:06,343 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 00:03:06,346 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 00:03:06,348 - car_diagnostics - INFO - Message processed for session cf7d293e-d123-4637-8e1b-9fe28262e93d
+2025-04-26 00:41:43,643 - watchfiles.main - INFO - 1 change detected
+2025-04-26 00:41:44,210 - watchfiles.main - INFO - 2 changes detected
+2025-04-26 00:58:19,694 - watchfiles.main - INFO - 5 changes detected
+2025-04-26 00:58:34,109 - watchfiles.main - INFO - 1 change detected
+2025-04-26 00:59:27,302 - car_diagnostics.llm - INFO - CarDiagnosisChat initialized with Groq API
+2025-04-26 00:59:28,982 - car_diagnostics.llm - INFO - Calling Groq API with 2 messages
+2025-04-26 00:59:30,346 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 00:59:30,346 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 00:59:30,346 - car_diagnostics - INFO - New chat session created: bcbf699d-b9dc-44af-a3f3-2ae859a3db24 for {'manufacturer': 'Honda', 'model': 'Civic', 'year': 2020}
+2025-04-26 00:59:45,904 - car_diagnostics.llm - INFO - Calling Groq API with 3 messages
+2025-04-26 00:59:47,341 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 00:59:47,341 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 00:59:47,349 - car_diagnostics - INFO - Message processed for session bcbf699d-b9dc-44af-a3f3-2ae859a3db24
+2025-04-26 00:59:52,427 - car_diagnostics.llm - INFO - Calling Groq API with 5 messages
+2025-04-26 00:59:53,488 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 00:59:53,498 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 00:59:53,501 - car_diagnostics - INFO - Message processed for session bcbf699d-b9dc-44af-a3f3-2ae859a3db24
+2025-04-26 01:00:09,014 - car_diagnostics.llm - INFO - Calling Groq API with 7 messages
+2025-04-26 01:00:09,732 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 01:00:09,732 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 01:00:09,747 - car_diagnostics - INFO - Message processed for session bcbf699d-b9dc-44af-a3f3-2ae859a3db24
+2025-04-26 14:49:25,161 - watchfiles.main - INFO - 5 changes detected
+2025-04-26 14:49:38,580 - car_diagnostics.llm - INFO - CarDiagnosisChat initialized with Groq API
+2025-04-26 14:49:40,317 - car_diagnostics.llm - INFO - Calling Groq API with 2 messages
+2025-04-26 14:49:41,539 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 14:49:41,539 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 14:49:41,539 - car_diagnostics - INFO - New chat session created: 1e233bd8-3c5c-499c-a184-2d344d4d66de for {'manufacturer': 'Honda', 'model': 'Civic', 'year': 2020}
+2025-04-26 14:50:04,421 - car_diagnostics.llm - INFO - Calling Groq API with 3 messages
+2025-04-26 14:50:04,991 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 14:50:04,991 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 14:50:04,991 - car_diagnostics - INFO - Message processed for session 1e233bd8-3c5c-499c-a184-2d344d4d66de
+2025-04-26 14:51:08,731 - car_diagnostics.llm - INFO - Calling Groq API with 5 messages
+2025-04-26 14:51:09,287 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 14:51:09,301 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 14:51:09,304 - car_diagnostics - INFO - Message processed for session 1e233bd8-3c5c-499c-a184-2d344d4d66de
+2025-04-26 14:52:44,969 - car_diagnostics.llm - INFO - CarDiagnosisChat initialized with Groq API
+2025-04-26 14:52:45,626 - car_diagnostics.llm - INFO - Calling Groq API with 2 messages
+2025-04-26 14:52:46,573 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 14:52:46,578 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 14:52:46,582 - car_diagnostics - INFO - New chat session created: e5f00cc2-001d-467f-8005-5e2bd0e2cda4 for {'manufacturer': 'mercedes', 'model': 'slr', 'year': 2020}
+2025-04-26 14:53:58,010 - car_diagnostics.llm - INFO - Calling Groq API with 3 messages
+2025-04-26 14:53:59,083 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-04-26 14:53:59,083 - car_diagnostics.llm - INFO - Successfully received response from Groq API
+2025-04-26 14:53:59,083 - car_diagnostics - INFO - Message processed for session e5f00cc2-001d-467f-8005-5e2bd0e2cda4

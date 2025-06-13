@@ -1,0 +1,229 @@
+{
+  "common_issues": {
+    "Toyota": {
+      "Corolla": {
+        "2015-2020": [
+          {
+            "issue": "CVT Transmission Problems",
+            "symptoms": "Jerking, hesitation, or shuddering during acceleration",
+            "parts_to_check": [
+              "Transmission fluid",
+              "CVT valve body",
+              "Transmission control module"
+            ],
+            "severity": "Medium"
+          },
+          {
+            "issue": "Excessive Oil Consumption",
+            "symptoms": "Oil level drops quickly, blue smoke from exhaust",
+            "parts_to_check": [
+              "Piston rings",
+              "PCV valve",
+              "Valve seals"
+            ],
+            "severity": "Medium"
+          }
+        ],
+        "2010-2014": [
+          {
+            "issue": "Electric Power Steering Failure",
+            "symptoms": "Steering becomes heavy, EPS warning light",
+            "parts_to_check": [
+              "EPS module",
+              "Steering column",
+              "Power steering motor"
+            ],
+            "severity": "High"
+          }
+        ]
+      },
+      "Camry": {
+        "2012-2017": [
+          {
+            "issue": "Excessive Oil Consumption",
+            "symptoms": "Oil level drops quickly between changes",
+            "parts_to_check": [
+              "Piston rings",
+              "PCV valve",
+              "Oil filter"
+            ],
+            "severity": "Medium"
+          }
+        ]
+      }
+    },
+    "Honda": {
+      "Civic": {
+        "2016-2020": [
+          {
+            "issue": "AC System Failure",
+            "symptoms": "Weak or no cooling, AC compressor noise",
+            "parts_to_check": [
+              "AC compressor",
+              "Condenser",
+              "Expansion valve"
+            ],
+            "severity": "Medium"
+          }
+        ],
+        "2006-2011": [
+          {
+            "issue": "Engine Block Cracking",
+            "symptoms": "Coolant leaks, overheating, white smoke from exhaust",
+            "parts_to_check": [
+              "Engine block",
+              "Head gasket",
+              "Radiator"
+            ],
+            "severity": "High"
+          }
+        ]
+      },
+      "Accord": {
+        "2013-2017": [
+          {
+            "issue": "Excessive Oil Consumption",
+            "symptoms": "Oil level drops quickly between changes",
+            "parts_to_check": [
+              "Piston rings",
+              "PCV valve",
+              "Oil filter"
+            ],
+            "severity": "Medium"
+          }
+        ]
+      }
+    },
+    "Suzuki": {
+      "Swift": {
+        "2010-2017": [
+          {
+            "issue": "Clutch Failure",
+            "symptoms": "Difficulty shifting gears, clutch slipping",
+            "parts_to_check": [
+              "Clutch plate",
+              "Pressure plate",
+              "Release bearing"
+            ],
+            "severity": "Medium"
+          }
+        ]
+      },
+      "Mehran": {
+        "2000-2019": [
+          {
+            "issue": "Carburetor Issues",
+            "symptoms": "Rough idling, poor fuel economy, stalling",
+            "parts_to_check": [
+              "Carburetor",
+              "Fuel filter",
+              "Air filter"
+            ],
+            "severity": "Medium"
+          }
+        ]
+      }
+    },
+    "Kia": {
+      "Sportage": {
+        "2011-2016": [
+          {
+            "issue": "Engine Failure",
+            "symptoms": "Knocking noise, loss of power, engine warning light",
+            "parts_to_check": [
+              "Engine bearings",
+              "Crankshaft",
+              "Oil pump"
+            ],
+            "severity": "High"
+          }
+        ]
+      }
+    },
+    "Hyundai": {
+      "Elantra": {
+        "2011-2016": [
+          {
+            "issue": "Engine Failure",
+            "symptoms": "Knocking noise, loss of power, engine warning light",
+            "parts_to_check": [
+              "Engine bearings",
+              "Crankshaft",
+              "Oil pump"
+            ],
+            "severity": "High"
+          }
+        ]
+      }
+    }
+  },
+  "age_based_issues": {
+    "0-3": [
+      {
+        "issue": "Software/Electronics Issues",
+        "symptoms": "Infotainment glitches, sensor malfunctions",
+        "parts_to_check": [
+          "ECU",
+          "Sensors",
+          "Wiring harness"
+        ],
+        "severity": "Low"
+      }
+    ],
+    "4-7": [
+      {
+        "issue": "Brake System Wear",
+        "symptoms": "Squeaking brakes, longer stopping distance",
+        "parts_to_check": [
+          "Brake pads",
+          "Rotors",
+          "Brake fluid"
+        ],
+        "severity": "Medium"
+      },
+      {
+        "issue": "Battery Failure",
+        "symptoms": "Difficulty starting, electrical issues",
+        "parts_to_check": [
+          "Battery",
+          "Alternator",
+          "Starter"
+        ],
+        "severity": "Medium"
+      }
+    ],
+    "8+": [
+      {
+        "issue": "Suspension Problems",
+        "symptoms": "Uneven tire wear, bouncy ride, clunking noises",
+        "parts_to_check": [
+          "Shock absorbers",
+          "Struts",
+          "Control arms",
+          "Bushings"
+        ],
+        "severity": "Medium"
+      },
+      {
+        "issue": "Timing Belt/Chain Failure",
+        "symptoms": "Engine misfires, ticking noise, check engine light",
+        "parts_to_check": [
+          "Timing belt",
+          "Timing chain",
+          "Tensioners"
+        ],
+        "severity": "High"
+      },
+      {
+        "issue": "Fuel System Issues",
+        "symptoms": "Poor fuel economy, rough idling, stalling",
+        "parts_to_check": [
+          "Fuel pump",
+          "Fuel injectors",
+          "Fuel filter"
+        ],
+        "severity": "Medium"
+      }
+    ]
+  }
+}

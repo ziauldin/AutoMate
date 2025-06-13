@@ -1,0 +1,5 @@
+{
+    "Toyota": ["Corolla", "Camry", "RAV4"],
+    "Honda": ["Civic", "Accord", "CR-V"],
+    "Ford": ["F-150", "Mustang", "Explorer"]
+  }

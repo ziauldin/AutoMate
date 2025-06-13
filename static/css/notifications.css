@@ -1,0 +1,60 @@
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius);
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 1100;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    max-width: 90%;
+    border-left: 4px solid var(--primary);
+  }
+  
+  .notification.show {
+    transform: translateX(0);
+  }
+  
+  .notification i {
+    font-size: 1.25rem;
+  }
+  
+  .notification.info {
+    border-color: var(--primary);
+  }
+  
+  .notification.info i {
+    color: var(--primary);
+  }
+  
+  .notification.success {
+    border-color: var(--success);
+  }
+  
+  .notification.success i {
+    color: var(--success);
+  }
+  
+  .notification.error {
+    border-color: var(--danger);
+  }
+  
+  .notification.error i {
+    color: var(--danger);
+  }
+  
+  .notification.warning {
+    border-color: var(--warning);
+  }
+  
+  .notification.warning i {
+    color: var(--warning);
+  }
+  

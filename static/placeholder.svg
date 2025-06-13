@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#f5f5f5"/>
+  <path d="M100,50 L300,50 L350,150 L300,250 L100,250 L50,150 Z" fill="#fff" stroke="#ddd" stroke-width="2"/>
+  <circle cx="200" cy="150" r="40" fill="#eee" stroke="#ddd" stroke-width="2"/>
+  <text x="200" y="150" font-family="Arial" font-size="16" text-anchor="middle" fill="#666" dy="5">
+    <tspan x="200" dy="-20">CAR IMAGE</tspan>
+    <tspan x="200" dy="20">NOT AVAILABLE</tspan>
+  </text>
+</svg>

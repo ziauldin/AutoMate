@@ -8,7 +8,6 @@ python-dotenv
 groq
 pandas
 scikit-learn
-psycopg2-binary
 python-multipart
 itsdangerous
 authlib

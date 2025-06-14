@@ -10,3 +10,4 @@ pandas
 scikit-learn
 psycopg2-binary
 python-multipart
+itsdangerous

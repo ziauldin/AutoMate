@@ -6,83 +6,74 @@ import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from app.models import Product
+# --- Configuration & Logging ----------------------------------------------
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("logs/diagnose_llm.log"),
+        logging.FileHandler("logs/recommend.log"),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
 
-# Read DATABASE_URL from your .env
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql+psycopg://postgres:admin@localhost:5432/auto_chatbot_db"
-)
+# Path to your CSV file (adjust if needed)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CSV_PATH = os.path.join(BASE_DIR, "data", "pakwheels_products.csv")
 
-# Create a sync engine & session for pandas loading
-sync_engine = create_engine(DATABASE_URL.replace("+asyncpg", ""), echo=False)
-SyncSession = sessionmaker(bind=sync_engine)
+# --- Module Cache ---------------------------------------------------------
 
-# Module-level cache
 _data_cache = {
     "df": None,
     "vectorizer": None,
     "matrix": None
 }
 
-def _load_and_index_from_db():
+# --- Indexing -------------------------------------------------------------
+
+def _load_and_index_from_csv():
+    """
+    Load the pakwheels_products.csv into a DataFrame, clean & combine the text,
+    and build a TF-IDF matrix.
+    """
     global _data_cache
-
     try:
-        logger.info("Loading products from database")
-        # Load all products into a DataFrame
-        with SyncSession() as db:
-            products = db.query(
-                Product.id,
-                Product.title,
-                Product.details,
-                Product.manufacturer,
-                Product.price,
-                Product.url
-            ).all()
-        
-        # Turn rows into DataFrame
-        df = pd.DataFrame(products, columns=[
-            "id", "title", "details", "manufacturer", "price", "url"
-        ])
+        logger.info("Loading products from CSV: %s", CSV_PATH)
+        df = pd.read_csv(CSV_PATH)
 
-        # Clean text data by removing special characters
-        df["title"] = df["title"].str.replace(r'[^\w\s]', '', regex=True)
-        df["details"] = df["details"].str.replace(r'[^\w\s]', '', regex=True)
-        df["manufacturer"] = df["manufacturer"].str.replace(r'[^\w\s]', '', regex=True)
+        # Expecting columns: id, title, details, manufacturer, price, url
+        # Clean text columns
+        for col in ("title", "details", "manufacturer"):
+            if col in df.columns:
+                df[col] = df[col].fillna("").astype(str).str.replace(r"[^\w\s]", "", regex=True)
+            else:
+                df[col] = ""
 
-        # Convert price to numeric
-        df["price"] = pd.to_numeric(df["price"].str.replace(r'PKR\s*', '', regex=True).str.replace(r',', '', regex=True), errors='coerce').astype(float)
+        # Convert price column if present
+        if "price" in df.columns:
+            df["price"] = (
+                df["price"].astype(str)
+                  .str.replace(r"[^\d\.]", "", regex=True)
+                  .replace("", "0")
+                  .astype(float)
+            )
+        else:
+            df["price"] = 0.0
 
-        # Preprocess text data
+        # Combine all text for TF-IDF
         df["combined_text"] = (
-            df["title"].fillna("") + " " +
-            df["details"].fillna("") + " " +
-            df["manufacturer"].fillna("")
+            df["title"] + " " + df["details"] + " " + df["manufacturer"]
         ).str.lower()
 
-        # Build TF-IDF index with more features
         logger.info("Building TF-IDF index")
         vect = TfidfVectorizer(
             min_df=1,
             max_df=0.95,
             stop_words="english",
-            ngram_range=(1, 3),  # Include trigrams
+            ngram_range=(1, 3),
             max_features=10000,
-            analyzer='word'
+            analyzer="word"
         )
         mat = vect.fit_transform(df["combined_text"])
 
@@ -90,97 +81,76 @@ def _load_and_index_from_db():
         _data_cache["vectorizer"] = vect
         _data_cache["matrix"] = mat
 
-        logger.info(f"Indexed {mat.shape[0]} products, {mat.shape[1]} features.")
+        logger.info("Indexed %d products, %d features.", mat.shape[0], mat.shape[1])
 
     except Exception:
-        logger.error("Error loading/indexing products:\n" + traceback.format_exc())
+        logger.error("Error indexing CSV:\n%s", traceback.format_exc())
         _data_cache = {"df": pd.DataFrame(), "vectorizer": None, "matrix": None}
 
-def _extract_keywords(text):
-    """Extract relevant keywords from the diagnosis text."""
-    # Common automotive parts and symptoms related to front lights
-    front_light_terms = [
-        'front light', 'headlight', 'head lamp', 'light bulb', 'lighting issue',
-        'dim light', 'flickering light', 'burnt-out bulb', 'halogen', 'LED',
-        'light socket', 'bulb holder', 'light assembly', 'headlight assembly',
-        'light switch', 'light cover', 'light trim', 'light bracket', 'light housing'
-    ]
-    
-    # Extract matching terms
+
+# --- Keyword Extraction ---------------------------------------------------
+
+def _extract_keywords(text: str) -> str:
+    """
+    Pull out automotive terms and fault codes to boost relevance.
+    """
     text_lower = text.lower()
-    keywords = [term for term in front_light_terms if term in text_lower]
-    
-    # Also extract specific part numbers or codes (like P0420)
-    codes = re.findall(r'\b[pP]\d{4}\b', text)
-    keywords.extend(codes)
-    
-    # Extract additional common automotive terms
-    additional_terms = [
-        'check engine light', 'oil change', 'tire rotation', 'alignment', 'air filter',
-        'brake pads', 'brake rotors', 'coolant', 'oil leak', 'battery terminal',
-        'spark plugs', 'fuel filter', 'airbag', 'steering wheel', 'seatbelt',
-        'wipers', 'windshield washer', 'battery charger', 'alternator belt',
-        'oil pressure', 'temperature gauge', 'fuel gauge', 'tire pressure',
-        'brake fluid', 'coolant level', 'air conditioning', 'heating system',
-        'engine oil', 'engine coolant', 'engine air filter', 'engine spark plugs',
-        'engine timing belt', 'engine water pump', 'engine oil pump', 'engine alternator',
-        'engine starter', 'engine clutch', 'engine differential', 'engine catalytic converter',
-        'engine oxygen sensor', 'engine mass airflow', 'engine throttle body', 'engine ignition coil',
-        'engine fuel injector', 'engine turbocharger', 'engine supercharger', 'engine shock absorber',
-        'engine strut', 'engine control arm', 'engine ball joint', 'engine tie rod', 'engine wheel bearing',
-        'engine cv joint', 'engine serpentine belt', 'engine power steering', 'engine ac compressor',
-        'engine heater core', 'engine thermostat', 'engine head gasket', 'engine piston',
-        'engine crankshaft', 'engine camshaft', 'engine valve', 'engine cylinder head'
+
+    # common parts & symptoms
+    parts = [
+        "headlight", "brake pads", "battery", "spark plugs",
+        "oil filter", "tire", "coolant", "alternator", "belt",
+        "sensor", "pump", "brake rotor", "fuse", "radiator"
     ]
-    
-    keywords.extend([term for term in additional_terms if term in text_lower])
-    
+    keywords = [p for p in parts if p in text_lower]
+
+    # OBD codes like P0420
+    codes = re.findall(r"\b[pP]\d{4}\b", text)
+    keywords.extend(codes)
+
     return " ".join(keywords)
+
+
+# --- Public API -----------------------------------------------------------
 
 def recommend_products(query: str, top_k: int = 5) -> list[dict]:
     """
-    Query the TF-IDF index built from the products table,
-    returning up to top_k matches as dicts.
+    Return up to `top_k` product dicts most similar to `query`.
     """
-    logger.info(f"Recommending products for query: {query[:50]}")
+
+    logger.info("Recommending for query: %s", query[:60])
     if _data_cache["df"] is None:
-        _load_and_index_from_db()
+        _load_and_index_from_csv()
 
     df = _data_cache["df"]
     vect = _data_cache["vectorizer"]
     mat = _data_cache["matrix"]
 
     if df.empty or vect is None or mat is None:
-        logger.warning("Recommendation engine not ready or no data.")
+        logger.warning("No product data available for recommendations.")
         return []
 
     try:
-        # Extract keywords from the diagnosis
-        processed_query = _extract_keywords(query) + " " + query.lower()
-        
-        # Transform query to TF-IDF
-        qv = vect.transform([processed_query])
-        
-        # Calculate cosine similarities
+        # boost with extracted keywords
+        processed = (_extract_keywords(query) + " " + query).lower()
+        qv = vect.transform([processed])
         sims = cosine_similarity(qv, mat).flatten()
-        
-        # Get top matches
-        top_idxs = sims.argsort()[:-top_k - 1:-1]
 
-        recs = []
-        for idx in top_idxs:
+        best_idxs = sims.argsort()[:-top_k - 1:-1]
+        results = []
+        for idx in best_idxs:
             row = df.iloc[idx]
-            recs.append({
-                "id": int(row["id"]),  # Convert to int for JSON serialization
-                "title": row["title"],
-                "manufacturer": row["manufacturer"],
-                "price": float(row["price"]) if pd.notna(row["price"]) else None,
-                "url": row["url"]
+            results.append({
+                "id": int(row.get("id", idx)),
+                "title": row.get("title", ""),
+                "manufacturer": row.get("manufacturer", ""),
+                "price": float(row.get("price", 0)),
+                "url": row.get("url", "")
             })
 
-        logger.info(f"Returning {len(recs)} recommendations.")
-        return recs
+        logger.info("Returning %d recommendations.", len(results))
+        return results
 
     except Exception:
-        logger.error("Error during recommendation:\n" + traceback.format_exc())
+        logger.error("Error during recommendation:\n%s", traceback.format_exc())
         return []

@@ -1,50 +1,49 @@
+# connection.py
 import os
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-# Load environment variables
+# 1. Load .env
 load_dotenv()
 
-# Database connection settings
-DB_USER = os.getenv("DB_USER", "postgres")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "admin")
-DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_PORT = os.getenv("DB_PORT", "5432")
-DB_NAME = os.getenv("DB_NAME", "auto_chatbot_db")
+# 2. Read the full DATABASE_URL (e.g. "postgresql+asyncpg://user:pass@host:port/dbname")
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("Missing DATABASE_URL environment variable")
 
-# Create async database URL
-DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-
-# Create async engine
+# 3. Create the async engine
 engine = create_async_engine(
     DATABASE_URL,
-    echo=False,  # Set to True for SQL query logging
+    echo=False,    # set True if you want SQL logging
     future=True,
 )
 
-# Create async session factory
+# 4. Session factory
 AsyncSessionLocal = sessionmaker(
-    engine, 
-    class_=AsyncSession, 
+    bind=engine,
+    class_=AsyncSession,
     expire_on_commit=False,
-    autocommit=False,
-    autoflush=False,
 )
 
-# Create declarative base
+# 5. Declarative base for your models
 Base = declarative_base()
 
-# Database dependency
+# 6. Dependency for FastAPI endpoints
 async def get_db():
     """
-    Dependency function that yields an async database session
+    Yields an AsyncSession, rolling back on error.
+    Usage:
+
+        @app.get("/items/")
+        async def read_items(db: AsyncSession = Depends(get_db)):
+            ...
     """
     async with AsyncSessionLocal() as session:
         try:
             yield session
-            await session.commit()
-        except Exception:
+        except:
             await session.rollback()
             raise
+        finally:
+            await session.close()

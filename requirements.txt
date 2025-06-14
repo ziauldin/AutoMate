@@ -1,7 +1,7 @@
 fastapi
-uvicorn
+uvicorn[standard]
 sqlalchemy
-asyncpg          # if you're using PostgreSQL
+asyncpg
 jinja2
 aiofiles
 python-dotenv

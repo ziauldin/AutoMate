@@ -46,17 +46,23 @@ def _load_and_index_from_csv():
         # Clean text columns
         for col in ("title", "details", "manufacturer"):
             if col in df.columns:
-                df[col] = df[col].fillna("").astype(str).str.replace(r"[^\w\s]", "", regex=True)
+                df[col] = (
+                    df[col]
+                    .fillna("")
+                    .astype(str)
+                    .str.replace(r"[^\w\s]", "", regex=True)
+                )
             else:
                 df[col] = ""
 
         # Convert price column if present
         if "price" in df.columns:
             df["price"] = (
-                df["price"].astype(str)
-                  .str.replace(r"[^\d\.]", "", regex=True)
-                  .replace("", "0")
-                  .astype(float)
+                df["price"]
+                .astype(str)
+                .str.replace(r"[^\d\.]", "", regex=True)
+                .replace("", "0")
+                .astype(float)
             )
         else:
             df["price"] = 0.0
@@ -87,7 +93,6 @@ def _load_and_index_from_csv():
         logger.error("Error indexing CSV:\n%s", traceback.format_exc())
         _data_cache = {"df": pd.DataFrame(), "vectorizer": None, "matrix": None}
 
-
 # --- Keyword Extraction ---------------------------------------------------
 
 def _extract_keywords(text: str) -> str:
@@ -110,14 +115,12 @@ def _extract_keywords(text: str) -> str:
 
     return " ".join(keywords)
 
-
 # --- Public API -----------------------------------------------------------
 
 def recommend_products(query: str, top_k: int = 5) -> list[dict]:
     """
     Return up to `top_k` product dicts most similar to `query`.
     """
-
     logger.info("Recommending for query: %s", query[:60])
     if _data_cache["df"] is None:
         _load_and_index_from_csv()

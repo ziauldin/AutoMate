@@ -1,6 +1,12 @@
 fastapi
 uvicorn
+sqlalchemy
+asyncpg          # if you're using PostgreSQL
 jinja2
-httpx
-python-dotenv
 aiofiles
+python-dotenv
+groq
+pandas
+scikit-learn
+psycopg2-binary
+python-multipart

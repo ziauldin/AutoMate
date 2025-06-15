@@ -3,7 +3,6 @@ from fastapi import APIRouter, Request, Depends, HTTPException, status
 from fastapi.responses import RedirectResponse
 from authlib.integrations.starlette_client import OAuth, OAuthError
 from starlette.config import Config
-from starlette.middleware.sessions import SessionMiddleware
 from pydantic import BaseModel
 from typing import Optional
 
@@ -13,7 +12,7 @@ GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID") or config("GOOGLE_CLIENT_ID", d
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET") or config("GOOGLE_CLIENT_SECRET", default="")
 
 if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
-    raise ValueError("Missing Google OAuth credentials. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.")
+    raise ValueError("Missing Google OAuth credentials. Please set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET.")
 
 # OAuth setup
 oauth = OAuth()
@@ -24,13 +23,12 @@ oauth.register(
     server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
     client_kwargs={
         "scope": "openid email profile",
-        "redirect_uri": "http://127.0.0.1:8500/api/auth/callback",
-        "prompt": "select_account",
+        "prompt": "select_account"
     },
 )
 
 # Router
-router = APIRouter(prefix="/api/auth", tags=["auth"])
+router = APIRouter(prefix="/auth", tags=["auth"])
 
 # Models
 class UserInfo(BaseModel):
@@ -40,7 +38,7 @@ class UserInfo(BaseModel):
     picture: Optional[str] = None
     is_authenticated: bool = True
 
-# Helper functions
+# Helpers
 def get_current_user(request: Request) -> UserInfo:
     user = request.session.get("user")
     if not user:
@@ -54,7 +52,11 @@ def get_current_user(request: Request) -> UserInfo:
 # Routes
 @router.get("/login")
 async def login(request: Request):
-    redirect_uri = request.url_for("auth_callback")
+    # Dynamically build redirect_uri
+    host = request.url.scheme + "://" + request.url.hostname
+    if request.url.port and request.url.port not in (80, 443):
+        host += f":{request.url.port}"
+    redirect_uri = host + "/auth/callback"
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
 @router.get("/callback")
@@ -70,7 +72,6 @@ async def auth_callback(request: Request):
                 "picture": user_info.get("picture"),
                 "is_authenticated": True
             }
-            # Redirect to home page after successful login
             return RedirectResponse(url="/")
         raise HTTPException(status_code=400, detail="Could not fetch user info")
     except OAuthError as error:

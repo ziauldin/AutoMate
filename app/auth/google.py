@@ -23,15 +23,14 @@ oauth.register(
     server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
     client_kwargs={
         "scope": "openid email profile",
-        "redirect_uri": "https://automate-production-30a8.up.railway.app/api/auth/callback",
         "prompt": "select_account",
     },
 )
 
-# Router with correct prefix
+# Router
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
-# Pydantic model
+# Pydantic model for user info
 class UserInfo(BaseModel):
     id: str
     email: str
@@ -39,7 +38,7 @@ class UserInfo(BaseModel):
     picture: Optional[str] = None
     is_authenticated: bool = True
 
-# Get user from session
+# Get current user from session
 def get_current_user(request: Request) -> UserInfo:
     user = request.session.get("user")
     if not user:
@@ -53,7 +52,7 @@ def get_current_user(request: Request) -> UserInfo:
 # Login route
 @router.get("/login")
 async def login(request: Request):
-    redirect_uri = request.url_for("auth_callback")
+    redirect_uri = request.url_for("auth_callback")  # Dynamically resolves callback URL
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
 # Callback route
@@ -75,13 +74,13 @@ async def auth_callback(request: Request):
     except OAuthError as error:
         return RedirectResponse(url=f"/?error={error.error}")
 
-# Logout
+# Logout route
 @router.get("/logout")
 async def logout(request: Request):
     request.session.pop("user", None)
     return RedirectResponse(url="/")
 
-# Get current user
+# Get user
 @router.get("/user")
 async def get_user(user: UserInfo = Depends(get_current_user)):
     return user

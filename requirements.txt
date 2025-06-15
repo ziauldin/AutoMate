@@ -11,4 +11,4 @@ scikit-learn
 python-multipart
 itsdangerous
 authlib
-psycopg2-binary
+psycopg[binary,async]

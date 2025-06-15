@@ -52,8 +52,9 @@ def get_current_user(request: Request) -> UserInfo:
 # Login route
 @router.get("/login")
 async def login(request: Request):
-    redirect_uri = request.url_for("auth_callback")  # Dynamically resolves callback URL
+    redirect_uri = "https://automate-production-30a8.up.railway.app/api/auth/callback"
     return await oauth.google.authorize_redirect(request, redirect_uri)
+
 
 # Callback route
 @router.get("/callback", name="auth_callback")

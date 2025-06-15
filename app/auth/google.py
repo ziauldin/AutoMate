@@ -23,14 +23,15 @@ oauth.register(
     server_metadata_url="https://accounts.google.com/.well-known/openid-configuration",
     client_kwargs={
         "scope": "openid email profile",
-        "prompt": "select_account"
+        "redirect_uri": "https://automate-production-30a8.up.railway.app/api/auth/callback",
+        "prompt": "select_account",
     },
 )
 
-# Router
-router = APIRouter(prefix="/auth", tags=["auth"])
+# Router with correct prefix
+router = APIRouter(prefix="/api/auth", tags=["auth"])
 
-# Models
+# Pydantic model
 class UserInfo(BaseModel):
     id: str
     email: str
@@ -38,7 +39,7 @@ class UserInfo(BaseModel):
     picture: Optional[str] = None
     is_authenticated: bool = True
 
-# Helpers
+# Get user from session
 def get_current_user(request: Request) -> UserInfo:
     user = request.session.get("user")
     if not user:
@@ -49,17 +50,14 @@ def get_current_user(request: Request) -> UserInfo:
         )
     return UserInfo(**user)
 
-# Routes
+# Login route
 @router.get("/login")
 async def login(request: Request):
-    # Dynamically build redirect_uri
-    host = request.url.scheme + "://" + request.url.hostname
-    if request.url.port and request.url.port not in (80, 443):
-        host += f":{request.url.port}"
-    redirect_uri = host + "/auth/callback"
+    redirect_uri = request.url_for("auth_callback")
     return await oauth.google.authorize_redirect(request, redirect_uri)
 
-@router.get("/callback")
+# Callback route
+@router.get("/callback", name="auth_callback")
 async def auth_callback(request: Request):
     try:
         token = await oauth.google.authorize_access_token(request)
@@ -77,11 +75,13 @@ async def auth_callback(request: Request):
     except OAuthError as error:
         return RedirectResponse(url=f"/?error={error.error}")
 
+# Logout
 @router.get("/logout")
 async def logout(request: Request):
     request.session.pop("user", None)
     return RedirectResponse(url="/")
 
+# Get current user
 @router.get("/user")
 async def get_user(user: UserInfo = Depends(get_current_user)):
     return user

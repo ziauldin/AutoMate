@@ -102,7 +102,7 @@ class DiagnoseLLM:
 
             # Generate response
             chat_completion = self.client.chat.completions.create(
-                model="gemma2-9b-it",
+                model="gemma-7b-it",
                 messages=processed_messages,
                 temperature=0.0,
                 max_tokens=1024,
